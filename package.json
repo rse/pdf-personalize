@@ -36,8 +36,7 @@
         "secure-random-password": "0.2.1",
         "pdf2json":               "1.1.8",
         "tmp":                    "0.1.0",
-        "prince":                 "1.7.0",
-        "execa":                  "4.0.0"
+        "prince":                 "1.7.0"
     },
     "engines": {
         "node":                   ">=10.0.0"

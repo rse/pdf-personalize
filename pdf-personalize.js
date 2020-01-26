@@ -30,7 +30,6 @@ const fs            = require("fs").promises
 const yargs         = require("yargs")
 const chalk         = require("chalk")
 const tmp           = require("tmp")
-const execa         = require("execa")
 const Prince        = require("prince")
 const PDFBox        = require("pdfbox-simple")
 const PDF2JSON      = require("pdf2json")
