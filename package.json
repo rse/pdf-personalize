@@ -33,6 +33,7 @@
         "yargs":                  "15.1.0",
         "chalk":                  "3.0.0",
         "pdfbox-simple":          "1.2.0",
+        "secure-random-password": "0.2.1",
         "pdf2json":               "1.1.8",
         "tmp":                    "0.1.0",
         "prince":                 "1.7.0",

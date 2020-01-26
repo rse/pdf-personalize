@@ -21,7 +21,7 @@ widely can be reduced for a medium-sensible document.
 Installation
 ------------
 
-ATTENTION: currently this requires node(1), npm(1), apg(1) and (the commercially licensed) prince(1).
+ATTENTION: currently this requires node(1), npm(1) and (the commercially licensed) prince(1).
 
 `$ npm install -g pptx-surgeon`
 

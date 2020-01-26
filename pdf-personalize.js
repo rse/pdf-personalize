@@ -34,6 +34,7 @@ const execa         = require("execa")
 const Prince        = require("prince")
 const PDFBox        = require("pdfbox-simple")
 const PDF2JSON      = require("pdf2json")
+const SRP           = require("secure-random-password")
 
 /*  act in an asynchronous context  */
 ;(async () => {
@@ -158,7 +159,10 @@ const PDF2JSON      = require("pdf2json")
     /*  optionally protect PDF with encryption  */
     const stage2 = tmp.fileSync()
     if (argv.encrypt) {
-        const { stdout: randomPW } = await execa("apg -n 1 -m 80 -a 1", [], { shell: true })
+        const randomPW = SRP.randomPassword({
+            length: 80,
+            characters: [ SRP.lower, SRP.upper, SRP.digits, SRP.symbols ]
+        })
         await pdfbox.exec(
             "Encrypt",
             "-canAssemble", "false",
