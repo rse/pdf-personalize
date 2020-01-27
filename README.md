@@ -43,6 +43,8 @@ Example
 $ pdf-personalize -p "Mr. John Doe" -e "secret" -o test-personalized.pdf test.pdf
 ```
 
+![screenshot](test-screenshot.png)
+
 License
 -------
 
