@@ -90,7 +90,7 @@ const SRP           = require("secure-random-password")
         doc.fontSize(9)
            .font("Helvetica")
            .fill("#ffffff")
-        const lh = doc.heightOfString("X")
+        const lh = doc.heightOfString("Xg")
         doc.text("This copy is licensed to",
             doc.page.width  - cm2pt(6.5),
             doc.page.height - cm2pt(0.5) - (4 * lh),
@@ -126,8 +126,7 @@ const SRP           = require("secure-random-password")
             stage0.name,
             "-position", "foreground",
             "-useAllPages", overlayPDF.name,
-            stage1.name
-        )
+            stage1.name)
 
         /*  cleanup  */
         overlayPDF.removeCallback()
@@ -156,8 +155,7 @@ const SRP           = require("secure-random-password")
             "-O", randomPW,
             "-U", argv.encrypt,
             stage1.name,
-            stage2.name
-        )
+            stage2.name)
     }
     else
         await fs.copyFile(stage1.name, stage2.name)
