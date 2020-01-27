@@ -21,18 +21,21 @@ widely can be reduced for a medium-sensible document.
 Installation
 ------------
 
-ATTENTION: currently this requires Java to be installed for the PDFBox dependency.
+`$ npm install -g pdf-personalize`
 
-`$ npm install -g pptx-surgeon`
+(NOTICE: this requires Java to be installed for the internal Apache PDFBox dependency)
 
 Usage
 -----
 
 ```
 $ pdf-personalize \
-  [-p|--personalize <name>>] \
-  [-e|--encrypt <password>] \
-  [-o|--output <pdf-file>] \
+  [-p <receiver-name>] \
+  [-B <overlay-background-color>] \
+  [-F <overlay-foreground-color>] \
+  [-O <overlay-opacity>] \
+  [-e <receiver-password>] \
+  [-o <output-pdf-file>] \
   <pdf-file>
 ```
 

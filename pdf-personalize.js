@@ -41,11 +41,17 @@ const SRP           = require("secure-random-password")
     /*  command-line option parsing  */
     const argv = yargs
         /* eslint indent: off */
-        .usage("Usage: $0 [-h] [-v] [-o <pptx-file>] <psd-file>")
+        .usage(
+            "Usage: $0 [-h] " +
+            "[-p <receiver-name>] " +
+            "[-B <overlay-background-color>] " +
+            "[-F <overlay-foreground-color>] " +
+            "[-O <overlay-opacity>] " +
+            "[-e <receiver-password>] " +
+            "[-o <output-pdf-file>] " +
+            "<pdf-file>")
         .help("h").alias("h", "help").default("h", false)
             .describe("h", "show usage help")
-        .string("o").nargs("o", 1).alias("o", "output").default("o", "")
-            .describe("o", "output PDF file")
         .string("p").nargs("p", 1).alias("p", "personalize").default("p", "")
             .describe("p", "personalize by adding an Overlay to each page referencing the name of the receiver")
         .string("B").nargs("B", 1).alias("B", "overlay-background-color").default("B", "#ff3300")
@@ -56,6 +62,8 @@ const SRP           = require("secure-random-password")
             .describe("O", "opacity of the overlay (the circle)")
         .string("e").nargs("e", 1).alias("e", "encrypt").default("e", "")
             .describe("e", "encrypt the output PDF with a password of the receiver")
+        .string("o").nargs("o", 1).alias("o", "output").default("o", "")
+            .describe("o", "output PDF file")
         .version(false)
         .strict()
         .showHelpOnFail(true)
