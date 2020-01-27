@@ -107,7 +107,7 @@ const SRP           = require("secure-random-password")
             return new Promise((resolve, reject) => {
                 let pendingStepCount = 2
                 const stepFinished = () => {
-                    if (--pendingStepCount == 0)
+                    if (--pendingStepCount === 0)
                         resolve()
                 }
                 const writeStream = fsR.createWriteStream(fileName, { encoding: null })
