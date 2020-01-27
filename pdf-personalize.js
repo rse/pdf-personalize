@@ -24,13 +24,14 @@
 */
 
 /*  internal requirements  */
+const fsR           = require("fs")
 const fs            = require("fs").promises
 
 /*  external requirements  */
 const yargs         = require("yargs")
 const chalk         = require("chalk")
 const tmp           = require("tmp")
-const Prince        = require("prince")
+const PDFKit        = require("pdfkit")
 const PDFBox        = require("pdfbox-simple")
 const PDF2JSON      = require("pdf2json")
 const SRP           = require("secure-random-password")
@@ -80,64 +81,44 @@ const SRP           = require("secure-random-password")
         })
 
         /*  generate overlay page  */
-        const overlayHTML = tmp.fileSync()
-        const html = `
-            <html>
-                <head>
-                    <style type="text/css">
-                        @page {
-                            size:         ${w}in ${h}in;
-                            margin:       0;
-                        }
-                        body, html {
-                            margin:       0;
-                            width:        ${w}in;
-                            height:       ${h}in;
-                            position:     relative;
-                        }
-                        .overlay .circle {
-                            position:     absolute;
-                            right:        -2cm;
-                            bottom:       -5cm;
-                            width:        8cm;
-                            height:       8cm;
-                            opacity:      0.8;
-                        }
-                        .overlay .circle circle {
-                            fill:         #ff3300;
-                        }
-                        .overlay .text {
-                            position:     absolute;
-                            right:        0.5cm;
-                            bottom:       0.5cm;
-                            color:        #ffffff;
-                            font-family:  "Helvetica Neue", Helvetica, sans-serif;
-                            font-size:    9pt;
-                            text-align:   right;
-                        }
-                    </style>
-                </head>
-                <body>
-                    <div class="overlay">
-                        <svg class="circle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                             <circle cx="50" cy="50" r="50"/>
-                        </svg>
-                        <div class="text">
-                            This copy is licensed to<br/>
-                            <b>${argv.personalize}</b><br>
-                            for strict personal use only.<br/>
-                            Any redistribution is prohibited.
-                        </div>
-                    </div>
-                </body>
-            </html>
-        `
-        await fs.writeFile(overlayHTML.name, html, { encoding: "utf8" })
+        const cm2pt = (cm) => (cm / 2.54 * 72)
+        const doc = new PDFKit({ size: [ w * 72, h * 72 ] })
+        doc.circle(doc.page.width - cm2pt(2), doc.page.height + cm2pt(1), cm2pt(4))
+            .lineWidth(0)
+            .fillOpacity(0.8)
+            .fill("#ff3300")
+        doc.fontSize(9)
+           .font("Helvetica")
+           .fill("#ffffff")
+        const lh = doc.heightOfString("X")
+        doc.text("This copy is licensed to",
+            doc.page.width  - cm2pt(6.5),
+            doc.page.height - cm2pt(0.5) - (4 * lh),
+            { width: cm2pt(6), height: 9, align: "right" })
+        doc.font("Helvetica-Bold")
+            .text(argv.personalize,
+            { width: cm2pt(6), height: 9, align: "right" })
+        doc.font("Helvetica")
+            .text("for strict personal use only.",
+            { width: cm2pt(6), height: 9, align: "right" })
+            .text("Any redistribution is prohibited.",
+            { width: cm2pt(6), height: 9, align: "right" })
+        const savePdfToFile = (doc, fileName) => {
+            return new Promise((resolve, reject) => {
+                let pendingStepCount = 2
+                const stepFinished = () => {
+                    if (--pendingStepCount == 0)
+                        resolve()
+                }
+                const writeStream = fsR.createWriteStream(fileName, { encoding: null })
+                writeStream.on("close", stepFinished)
+                doc.pipe(writeStream)
+                doc.end()
+                stepFinished()
+            })
+        }
         const overlayPDF = tmp.fileSync()
-        await Prince()
-            .inputs(overlayHTML.name)
-            .output(overlayPDF.name)
-            .execute()
+        await savePdfToFile(doc, overlayPDF.name)
 
         /*  merge overlay page onto all pages of the document  */
         await pdfbox.exec(
@@ -149,7 +130,6 @@ const SRP           = require("secure-random-password")
         )
 
         /*  cleanup  */
-        overlayHTML.removeCallback()
         overlayPDF.removeCallback()
     }
     else
