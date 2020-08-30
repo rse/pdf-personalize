@@ -22,7 +22,7 @@
     "main": "./pdf-personalize.js",
     "devDependencies": {
         "babel-eslint":           "10.1.0",
-        "eslint":                 "7.4.0",
+        "eslint":                 "7.7.0",
         "eslint-config-standard": "14.1.1",
         "eslint-plugin-standard": "4.0.1",
         "eslint-plugin-promise":  "4.2.1",
@@ -32,7 +32,7 @@
     "dependencies" : {
         "yargs":                  "15.4.1",
         "chalk":                  "4.1.0",
-        "pdfbox-simple":          "1.2.6",
+        "pdfbox-simple":          "1.2.8",
         "pdfkit":                 "0.11.0",
         "secure-random-password": "0.2.1",
         "pdf2json":               "1.2.0",
