@@ -22,19 +22,19 @@
     "main": "./pdf-personalize.js",
     "devDependencies": {
         "babel-eslint":           "10.1.0",
-        "eslint":                 "7.22.0",
-        "eslint-config-standard": "16.0.2",
-        "eslint-plugin-promise":  "4.3.1",
-        "eslint-plugin-import":   "2.22.1",
+        "eslint":                 "7.32.0",
+        "eslint-config-standard": "16.0.3",
+        "eslint-plugin-promise":  "5.1.0",
+        "eslint-plugin-import":   "2.24.2",
         "eslint-plugin-node":     "11.1.0"
     },
     "dependencies" : {
-        "yargs":                  "16.2.0",
-        "chalk":                  "4.1.0",
-        "pdfbox-simple":          "1.2.12",
-        "pdfkit":                 "0.11.0",
-        "secure-random-password": "0.2.2",
-        "pdf2json":               "1.2.0",
+        "yargs":                  "17.1.1",
+        "chalk":                  "4.1.2",
+        "pdfbox-simple":          "1.2.14",
+        "pdfkit":                 "0.12.3",
+        "secure-random-password": "0.2.3",
+        "pdf2json":               "1.2.3",
         "tmp":                    "0.2.1"
     },
     "engines": {
