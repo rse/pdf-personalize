@@ -85,8 +85,8 @@ const SRP           = require("secure-random-password")
         pdf2json.loadPDF(stage0.name)
         const { w, h } = await new Promise((resolve, reject) => {
             pdf2json.on("pdfParser_dataReady", (pdf) => {
-                const w = pdf.formImage.Width / 4.5
-                const h = pdf.formImage.Pages[0].Height / 4.5
+                const w = pdf.Pages[0].Width  / 4.5
+                const h = pdf.Pages[0].Height / 4.5
                 resolve({ w, h })
             })
             pdf2json.on("pdfParser_dataError", (error) => {
