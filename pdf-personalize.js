@@ -1,7 +1,7 @@
 #!/usr/opkg/bin/node
 /*!
 **  pdf-personalize -- Personalize PDF with Overlays and Encryption
-**  Copyright (c) 2019-2022 Dr. Ralf S. Engelschall <rse@engelschall.com>
+**  Copyright (c) 2019-2023 Dr. Ralf S. Engelschall <rse@engelschall.com>
 **
 **  Permission is hereby granted, free of charge, to any person obtaining
 **  a copy of this software and associated documentation files (the
