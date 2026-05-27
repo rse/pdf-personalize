@@ -34,7 +34,7 @@
         "pdfkit":                 "0.13.0",
         "secure-random-password": "0.2.3",
         "pdf2json":               "2.0.2",
-        "tmp":                    "0.2.1"
+        "tmp":                    "0.2.6"
     },
     "upd":                        [ "!chalk", "!pdf2json" ],
     "engines": {
